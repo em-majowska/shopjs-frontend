@@ -1,26 +1,290 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --radius: 0.5rem;
+
+  --background: hsl(40, 43%, 97%);
+  --foreground: hsl(35, 12%, 31%);
+  --card: hsl(48, 20%, 99%);
+
+  /* Boutons principaux : encre brune profonde */
+  --primary: hsl(21, 21%, 22%);
+  --primary-foreground: hsl(45, 20%, 97%);
+
+  --secondary: hsl(45, 15%, 94%);
+  --secondary-foreground: hsl(35, 15%, 35%);
+
+  --muted: hsl(45, 12%, 95%);
+  --muted-foreground: hsl(35, 8%, 53%);
+  /* Survol doux : rose poudré */
+  --accent: hsl(15, 30%, 92%);
+  --accent-foreground: hsl(15, 20%, 38%);
+
+  --destructive: hsl(15, 75%, 52%);
+  --destructive-foreground: hsl(45, 20%, 97%);
+  --border: hsl(42, 12%, 90%);
+  --ring: hsl(28, 25%, 70%);
+
+  /* Teintes signature */
+  --rose: hsl(12, 45%, 81%);
+  --rose-foreground: hsl(12, 35%, 40%);
+  --sand: hsl(45, 25%, 93%);
+  --gold: hsl(45, 45%, 68%);
+
+  --chart-1: hsl(20, 60%, 61%);
+  --chart-2: hsl(184, 30%, 57%);
+  --chart-3: hsl(220, 25%, 39%);
+  --chart-4: hsl(50, 65%, 80%);
+  --chart-5: hsl(38, 65%, 74%);
 }
 
 @theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --main: calc(100vh - 130px - 65px);
+
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+
+  --shadow-soft: 0 24px 48px -24px rgb(74 58 44 / 0.14);
+  --shadow-lift: 0 10px 30px -14px rgb(74 58 44 / 0.18);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-rose: var(--rose);
+  --color-rose-foreground: var(--rose-foreground);
+  --color-sand: var(--sand);
+  --color-gold: var(--gold);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-foreground);
   }
 }
 
-body {
+@utility no-scrollbar {
+  /* Firefox */
+  scrollbar-width: none;
+  /* IE and Edge */
+  -ms-overflow-style: none;
+  /* Safari and Chrome */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .main {
+    min-height: var(--main);
+    padding-block: 56px 80px;
+  }
+  .content {
+    max-width: 1028px;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  /* Étiquette fine en capitales espacées */
+  .label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Champ de formulaire délicat */
+  .field {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-input);
+    background-color: var(--color-card);
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+    color: var(--color-foreground);
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    margin-top: 12px;
+    letter-spacing: 1;
+    font-weight: normal;
+  }
+  .field-pwd {
+    letter-spacing: 1;
+    font-weight: normal;
+    outline: none;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .field::placeholder {
+    color: var(--color-muted-foreground);
+  }
+
+  .field:focus,
+  .field:has(.field-pwd:focus) {
+    border-color: var(--color-ring);
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--color-ring) 18%, transparent);
+  }
+
+  /* Bouton encre plein */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+    padding: 0.65rem 1.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      opacity 0.2s ease,
+      transform 0.15s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.88;
+  }
+
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* Bouton contour fin */
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    color: var(--color-foreground);
+    padding: 0.65rem 1.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  /* Animation d'apparition douce */
+  .fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: hsl(35, 12%, 23%);
+    --foreground: hsl(45, 18%, 94%);
+    --card: hsl(35, 12%, 27%);
+    --card-foreground: hsl(45, 18%, 94%);
+    --popover: hsl(35, 12%, 27%);
+    --popover-foreground: hsl(45, 18%, 94%);
+    --primary: hsl(45, 20%, 93%);
+    --primary-foreground: hsl(35, 14%, 27%);
+    --secondary: hsl(35, 10%, 32%);
+    --secondary-foreground: hsl(45, 18%, 94%);
+    --muted: hsl(35, 10%, 32%);
+    --muted-foreground: hsl(38, 8%, 71%);
+    --accent: hsl(20, 18%, 37%);
+    --accent-foreground: hsl(45, 18%, 94%);
+    --destructive: hsl(12, 65%, 65%);
+    --destructive-foreground: hsl(45, 18%, 94%);
+    --border: hsla(0, 0%, 100%, 0.12);
+    --input: hsla(0, 0%, 100%, 0.16);
+    --ring: hsl(35, 15%, 59%);
+    --rose: hsl(12, 40%, 68%);
+    --rose-foreground: hsl(12, 20%, 89%);
+    --sand: hsl(35, 12%, 33%);
+    --gold: hsl(45, 42%, 73%);
+    --chart-1: hsl(264, 75%, 64%);
+    --chart-2: hsl(162, 45%, 63%);
+    --chart-3: hsl(38, 65%, 74%);
+    --chart-4: hsl(304, 65%, 61%);
+    --chart-5: hsl(16, 75%, 63%);
+  }
+} */
+
+/* body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
