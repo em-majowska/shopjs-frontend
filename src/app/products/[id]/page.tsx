@@ -1,61 +1,44 @@
-export const dynamic = "force-dynamic";
+import BackButton from "@/components/BackButton";
+import ProductDetails from "@/components/ProductDetails";
+import { ProductPageSkeleton } from "@/components/Skeletons";
+import fetchProduct from "@/queries/fetchProduct";
+import { Metadata } from "next";
+import { Suspense } from "react";
 
-import api from "@/features/api/api";
-import { TProduct } from "@/types";
-import Image from "next/image";
-import Link from "next/link";
-import { IoIosArrowRoundBack } from "react-icons/io";
-
-const fetchProduct = async (id: string) => {
+export const generateMetadata = async ({
+  params,
+}: TProductIdPage): Promise<Metadata> => {
+  const { id } = await params;
   try {
-    const { data } = await api.get<TProduct>(`/products/${id}`);
+    const product = await fetchProduct(id);
 
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch product details:", error);
-    throw new Error(
-      "Nous n&apos;avons pas pu récupérer les informations de nos produits. Un problème technique temporaire s&apos;est produit.",
-    );
+    if (!product) {
+      return {
+        title: "Produit non trouvé | Maison Lumière",
+      };
+    }
+
+    return {
+      title: `${product.title} | Maison Lumière`,
+      description: product.description || "Découvrez nos produits d'exception.",
+    };
+  } catch {
+    return {
+      title: "Produit | Maison Lumière",
+    };
   }
 };
 
-const ProductIdPage = async ({
-  params,
-}: {
+type TProductIdPage = {
   params: Promise<{ id: string }>;
-}) => {
-  const { id } = await params;
-  const product = await fetchProduct(id);
-  const { title, description, price, brand, rating, images } = product;
+};
+const ProductIdPage = async ({ params }: TProductIdPage) => {
   return (
-    <main>
-      <Link href="/products">
-        <IoIosArrowRoundBack /> Tous les produits
-      </Link>
-      <section>
-        <div>
-          {images.map((img, i) => (
-            <Image
-              key={i}
-              src={img}
-              alt="Image du produit"
-              width="530"
-              height="530"
-            />
-          ))}
-        </div>
-        <p>{brand}</p>
-        <h2>{title}</h2>
-        <p>{price} €</p>
-        <p>{rating} stars</p>
-        <p>{description}</p>
-        <br />
-        <div>
-          <button>-</button>
-          <span>0</span>
-          <button>+</button>
-        </div>
-      </section>
+    <main className="main content">
+      <BackButton />
+      <Suspense fallback={<ProductPageSkeleton />}>
+        <ProductDetails params={params} />
+      </Suspense>
     </main>
   );
 };

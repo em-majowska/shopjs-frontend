@@ -11,7 +11,7 @@ const CartRecap = () => {
       <hr />
       <p className="flex justify-between py-4">
         <span className="text-muted-f">Total</span>
-        <span className="font-medium">{total} €</span>
+        <span className="font-medium">{total}</span>
       </p>
       <p className="text-muted-foreground mb-10 text-sm">
         Livraison offerte en France métropolitaine.

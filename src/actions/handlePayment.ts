@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 
 type TOrderData = {
   products: { product: string; quantity: number }[];
-  price: number;
+  total: number;
 };
 
 const handlePayment = async (
@@ -21,23 +21,18 @@ const handlePayment = async (
     if (!token) {
       throw new Error("Veuillez vous connecter avant de commander.");
     }
-    const { products, price } = orderData;
+    const { products, total } = orderData;
 
     if (!products || products.length === 0) {
       throw new Error(
         "Votre panier est vide. Veuillez ajouter des articles avant de commander.",
       );
     }
-
     const address = formData.get("address")?.toString().trim();
-
-    if (!address) {
-      throw new Error("Veuillez renseigner votre adresse de livraison.");
-    }
 
     await api.post(
       "/orders",
-      { products, address, price },
+      { products, address, price: total },
       { headers: { Authorization: `Bearer ${token}` } },
     );
 

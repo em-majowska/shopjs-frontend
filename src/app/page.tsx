@@ -1,14 +1,17 @@
-export const dynamic = "force-dynamic";
-
 import Image from "next/image";
 import Link from "next/link";
 import { LuDroplet, LuLeaf, LuHandHeart } from "react-icons/lu";
 import HeroImage from "@/assets/hero.jpg";
 import EssentialProducts from "@/components/EssentialProducts";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { cache } from "react";
-import api from "@/features/api/api";
-import { TProduct } from "@/types";
+import searchData from "@/queries/searchData";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Maison Lumière — Boutique de cosmétiques français",
+  description:
+    "Découvrez Maison Lumière : soins du visage, parfums et savons artisanaux composés en France, dans une boutique en ligne délicate et épurée.",
+};
 
 const values = [
   {
@@ -28,19 +31,8 @@ const values = [
   },
 ];
 
-const fetchData = cache(async () => {
-  try {
-    const { data } = await api.get<TProduct[]>("/products");
-
-    return data.slice(0, 5);
-  } catch (error) {
-    console.error("Failed to fetch products:", error);
-    return null;
-  }
-});
-
 export default async function Home() {
-  const products = await fetchData();
+  const { products } = await searchData();
 
   return (
     <main className="main w-full">
@@ -57,7 +49,7 @@ export default async function Home() {
               <em className="text-rose-foreground italic">délicatesse</em>
             </h1>
           </div>
-          <p>
+          <p className="text-balance">
             Maison Lumière compose des soins, des parfums et des savons
             artisanaux aux formules courtes et aux textures fines. Une routine
             simple, sensorielle, respectueuse de votre peau.
@@ -75,16 +67,21 @@ export default async function Home() {
           className="border-border shadow-soft rounded-xl border"
         />
       </section>
-      <section className="border-border bg-sand/80 mb-20 flex flex-col gap-10 border-t border-b px-4 py-15">
-        {values.map((val) => (
-          <div key={val.title} className="flex flex-col items-center gap-5">
-            <val.icon className="text-rose" size="25px" />
-            <h2 className="font-display text-2xl font-medium">{val.title}</h2>
-            <p className="text-muted-foreground text-center text-sm">
-              {val.text}
-            </p>
-          </div>
-        ))}
+      <section className="border-border bg-sand/80 mb-20 border-t border-b px-4 py-15">
+        <div className="content flex flex-col gap-10 md:flex-row">
+          {values.map((val) => (
+            <div
+              key={val.title}
+              className="flex flex-col items-center gap-4 md:items-start"
+            >
+              <val.icon className="text-rose size-6" />
+              <h2 className="font-display text-2xl font-medium">{val.title}</h2>
+              <p className="text-muted-foreground max-w-[65ch] text-center text-sm text-balance md:text-start">
+                {val.text}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
       {products && <EssentialProducts products={products} />}
     </main>

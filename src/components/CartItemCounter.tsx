@@ -17,9 +17,9 @@ const CartItemCounter = ({ product }: TCartItemCounter) => {
   const quantity = cartItem ? cartItem.quantity : 0;
 
   return (
-    <div className="border-border overflow-hidden rounded-2xl border">
+    <div className="border-border flex overflow-hidden rounded-2xl border">
       <button
-        className="text-muted-foreground hover:bg-sand px-3 py-1 text-xl"
+        className="text-muted-foreground hover:bg-sand px-3 py-1 text-xl transition-colors"
         onClick={(e) => {
           e.preventDefault();
           removeProduct(product._id);
@@ -27,9 +27,11 @@ const CartItemCounter = ({ product }: TCartItemCounter) => {
       >
         -
       </button>
-      <span className="px-2 py-1">{quantity}</span>
+      <span className="flex w-10 items-center justify-center py-1">
+        {quantity}
+      </span>
       <button
-        className="text-muted-foreground hover:bg-sand px-3 py-1 text-xl transition-all"
+        className="text-muted-foreground hover:bg-sand px-3 py-1 text-xl transition-colors"
         onClick={(e) => {
           e.preventDefault();
           addProduct(product);

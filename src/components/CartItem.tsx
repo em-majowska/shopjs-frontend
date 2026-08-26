@@ -2,6 +2,7 @@ import { TCartItem } from "@/types";
 import Image from "next/image";
 import CartItemCounter from "./CartItemCounter";
 import Link from "next/link";
+import PriceElement from "./PriceElement";
 
 type TCartItemElement = {
   product: TCartItem;
@@ -9,7 +10,7 @@ type TCartItemElement = {
 };
 
 const CartItemElement = ({ product, payment = false }: TCartItemElement) => {
-  const { thumbnail, title, price, quantity, _id } = product;
+  const { thumbnail, title, quantity, _id } = product;
   return payment ? (
     <article className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-4">
@@ -19,7 +20,7 @@ const CartItemElement = ({ product, payment = false }: TCartItemElement) => {
         </p>
       </div>
       <div className="flex shrink-0 flex-col items-end gap-2">
-        <p className="font-medium">{price * quantity} €</p>
+        <PriceElement product={product} calculate={true} />
       </div>
     </article>
   ) : (
@@ -44,16 +45,17 @@ const CartItemElement = ({ product, payment = false }: TCartItemElement) => {
           >
             {title}
           </Link>
-          <p className="text-muted-foreground">
-            <span>{price} €</span> ·{" "}
+          <div className="text-muted-foreground">
+            <PriceElement className="inline" product={product} /> ·{" "}
             <span>
               {quantity} article{quantity > 1 && "s"}
             </span>
-          </p>
+          </div>
         </div>
       </div>
       <div className="flex shrink-0 flex-col items-end gap-2">
-        <p className="font-medium">{price * quantity} €</p>
+        <PriceElement product={product} calculate={true} />
+
         {!payment && <CartItemCounter product={product} />}
       </div>
     </article>

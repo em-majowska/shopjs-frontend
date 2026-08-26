@@ -8,7 +8,7 @@ import { SlWallet } from "react-icons/sl";
 const PayButton = () => {
   const isHydrated = useHydrated();
 
-  const total = useStore((store) => store.getTotal());
+  const total = useStore((store) => store.getTotalLocale());
   const { pending } = useFormStatus();
   return (
     <button className="btn-primary w-full" disabled={pending}>
@@ -16,7 +16,7 @@ const PayButton = () => {
       {pending ? (
         "Payment en cours de validation..."
       ) : (
-        <span>Payer {isHydrated && `(${total} €)`}</span>
+        <span>Payer {isHydrated && `(${total})`}</span>
       )}
     </button>
   );

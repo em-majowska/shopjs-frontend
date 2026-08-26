@@ -20,6 +20,9 @@ const handleLogin = async (
     cookieStore.set("token", token, {
       expires: Date.now() + 1000 * 60 * 60 * 24 * 14,
     });
+    cookieStore.set("isAdmin", data.admin, {
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 14,
+    });
     return { error: null, isAdmin: data.admin };
   } catch (e) {
     if (isAxiosError(e)) {

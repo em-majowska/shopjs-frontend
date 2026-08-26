@@ -1,6 +1,6 @@
 "use client";
 
-import handleSignup from "@/actions/signup";
+import handleSignup from "@/actions/handleSignup";
 import { useStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";

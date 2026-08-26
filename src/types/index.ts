@@ -4,7 +4,6 @@ export type TProduct = {
   description: string;
   price: number;
   brand: string;
-  rating: number;
   thumbnail: string;
   images: string[];
 };
@@ -16,4 +15,22 @@ export type TCartItem = TProduct & {
 export type TPaymentFormState = {
   isSuccess: boolean;
   error: null | string;
+};
+
+export type TOrderItem = {
+  product: string;
+  quantity: 1;
+  _id: string;
+};
+
+export type TOrder = {
+  _id: string;
+  owner: {
+    username: string;
+    email: string;
+  };
+  products: TOrderItem[];
+  price: number;
+  delivered: boolean;
+  address: string;
 };

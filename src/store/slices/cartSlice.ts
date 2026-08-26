@@ -1,10 +1,12 @@
 import { TCartItem, TProduct } from "@/types";
 import { StateCreator } from "zustand";
 import { TUserSlice } from "./userSlice";
+import { calculateTotal, getLocalTotal } from "@/utils/calculateLocalPrice";
 
 export type TCartSlice = {
   cart: TCartItem[];
   getTotal: () => number;
+  getTotalLocale: () => string;
   addProduct: (product: TProduct, quantity?: number) => void;
   removeProduct: (id: string) => void;
   emptyCart: () => void;
@@ -18,12 +20,8 @@ export const cartSlice: StateCreator<
 > = (set, get) => {
   return {
     cart: [],
-    getTotal: () => {
-      return get().cart.reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0,
-      );
-    },
+    getTotal: () => calculateTotal(get().cart),
+    getTotalLocale: () => getLocalTotal(get().cart),
     addProduct: (product, quantity = 1) => {
       set((state) => {
         const index = state.cart.findIndex((item) => item._id === product._id);

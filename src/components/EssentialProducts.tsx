@@ -21,7 +21,6 @@ const EssentialProducts = ({ products }: TEssentialProducts) => {
       if (window.innerWidth >= 768) {
         if (e.deltaY !== 0) {
           e.preventDefault();
-          console.log("wheeeeel");
 
           carousel.scrollLeft += e.deltaY * 2;
         }
@@ -44,7 +43,7 @@ const EssentialProducts = ({ products }: TEssentialProducts) => {
         </div>
         <Link
           href="/products"
-          className="label hidden items-center gap-2 sm:flex"
+          className="label hover:text-accent-foreground hidden items-center gap-2 sm:flex"
         >
           Tout voir <IoIosArrowRoundForward />
         </Link>
@@ -53,11 +52,11 @@ const EssentialProducts = ({ products }: TEssentialProducts) => {
         ref={carouselRef}
         className="no-scrollbar grid grid-cols-1 gap-6 sm:grid-cols-2 md:flex md:overflow-x-auto md:scroll-smooth md:pr-12"
       >
-        {products.map((product) => (
+        {products.slice(0, 5).map((product) => (
           <Link
             key={product._id}
             href={`/products/${product._id}`}
-            className="w-full shrink-0 md:w-77.5"
+            className="w-full shrink-0 md:w-[calc((100%-3rem)/2.5)]"
           >
             <ProductCard product={product} />
           </Link>

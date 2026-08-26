@@ -1,30 +1,22 @@
-export const dynamic = "force-dynamic";
-
-import ProductCard from "@/components/ProductCard";
+import ProductsList from "@/components/ProductsList";
 import SearchInput from "@/components/SearchInput";
-import api from "@/features/api/api";
-import { TProduct } from "@/types";
-import Link from "next/link";
-import { cache } from "react";
+import { ProductsSkeleton } from "@/components/Skeletons";
+import { Metadata } from "next";
+import { Suspense } from "react";
 
 // TODO pregenerate on build
 
-const fetchProducts = cache(async () => {
-  try {
-    const { data } = await api.get<TProduct[]>(`/products`);
+export const metadata: Metadata = {
+  title: "Nos produits — Maison Lumière",
+  description:
+    "Parcourez la collection Maison Lumière : sérums, crèmes, parfums, huiles et savons artisanaux français.",
+};
 
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch products:", error);
-    throw new Error(
-      "Nous n&apos;avons pas pu récupérer les produits. Un problème technique temporaire s&apos;est produit.",
-    );
-  }
-});
+type TProductsPage = {
+  searchParams: Promise<{ search?: string }>;
+};
 
-const ProductsPage = async () => {
-  const products = await fetchProducts();
-
+const ProductsPage = async ({ searchParams }: TProductsPage) => {
   return (
     <main className="main content">
       <div className="mb-10 flex flex-col justify-between gap-3 md:flex-row md:items-end">
@@ -34,15 +26,17 @@ const ProductsPage = async () => {
             Tous nos produits
           </h1>
         </div>
-        <SearchInput />
+        <Suspense
+          fallback={
+            <div className="bg-muted h-10 w-full animate-pulse rounded-lg md:w-64" />
+          }
+        >
+          <SearchInput />
+        </Suspense>
       </div>
-      <div className="grid-cols01 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {products.map((product) => (
-          <Link key={product._id} href={`/products/${product._id}`}>
-            <ProductCard product={product} />
-          </Link>
-        ))}
-      </div>
+      <Suspense fallback={<ProductsSkeleton />}>
+        <ProductsList searchParams={searchParams} />
+      </Suspense>
     </main>
   );
 };

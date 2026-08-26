@@ -1,6 +1,7 @@
 import { TProduct } from "@/types";
 import Image from "next/image";
 import CartItemCounter from "./CartItemCounter";
+import PriceElement from "./PriceElement";
 
 type TProductCard = {
   product: TProduct;
@@ -25,7 +26,7 @@ const ProductCard = ({ product }: TProductCard) => {
           <p className="font-display text-xl font-medium">{product.title}</p>
         </div>
         <div className="flex items-center justify-between">
-          <p className="font-medium">{product.price} €</p>
+          <PriceElement product={product} />
           <CartItemCounter product={product} />
         </div>
       </div>

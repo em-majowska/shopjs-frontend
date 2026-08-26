@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
 import { TCartSlice } from "./cartSlice";
-import logout from "@/actions/logout";
+import handleLogout from "@/actions/handleLogout";
 
 export type TUserSlice = {
   isAdmin: boolean;
@@ -24,7 +24,7 @@ export const userSlice: StateCreator<
       set((state) => {
         state.isAuthenticated = false;
         state.isAdmin = false;
-        logout();
+        handleLogout();
       }),
   };
 };
