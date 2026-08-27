@@ -12,6 +12,11 @@ export type TCartItem = TProduct & {
   quantity: number;
 };
 
+export type TLoginFormState = {
+  error: null | string;
+  isAdmin: boolean;
+};
+
 export type TPaymentFormState = {
   isSuccess: boolean;
   error: null | string;

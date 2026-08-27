@@ -1,7 +1,13 @@
 import fetchOrders from "@/queries/fetchOrders";
+import { cookies } from "next/headers";
 
 const OrdersCounter = async () => {
-  const orders = await fetchOrders();
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) {
+    throw new Error("Veuillez vous connecter.");
+  }
+  const orders = await fetchOrders(token);
   const pending = orders.filter((order) => !order.delivered);
 
   return (

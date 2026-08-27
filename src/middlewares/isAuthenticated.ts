@@ -2,12 +2,12 @@
 
 import { cookies } from "next/headers";
 
-const isAuthenticated = async (): Promise<boolean> => {
+const isAuthenticated = async (): Promise<boolean | string> => {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
 
   if (!token) return false;
-  return true;
+  return token;
 };
 
 export default isAuthenticated;

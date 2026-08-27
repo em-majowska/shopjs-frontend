@@ -28,7 +28,7 @@ const OrderCard = ({ order, productMap }: TOrderCard) => {
     });
   };
   return (
-    <section className="bg-card border-border shadow-shadow mx-auto flex w-full max-w-xl flex-3 flex-col gap-3 rounded-2xl border p-6">
+    <section className="bg-card border-border shadow-shadow fade-up mx-auto flex w-full max-w-xl flex-3 flex-col gap-3 rounded-2xl border p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-rose-foreground text-lg">{_id}</h2>
         <DeliveryPill delivered={delivered} />

@@ -60,6 +60,7 @@ const ProductGallery = ({ images, title }: TProductGallery) => {
               alt={`${title} - image ${i + 1}`}
               width="530"
               height="530"
+              loading="lazy"
               className="fade-up h-full w-full object-contain"
               priority={i === 0}
               onLoad={() => handleImageLoading(i)}

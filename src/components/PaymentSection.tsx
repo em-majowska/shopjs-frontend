@@ -33,7 +33,10 @@ const PaymentSection = () => {
       const address = formData.get("address")?.toString().trim();
 
       if (!address) {
-        throw new Error("Veuillez renseigner votre adresse de livraison.");
+        return {
+          ...prevState,
+          error: "Veuillez renseigner votre adresse de livraison.",
+        };
       }
       const { isSuccess: success, error } = await handleWithData(
         prevState,
@@ -100,7 +103,7 @@ const PaymentSection = () => {
       </Link>
     </section>
   ) : (
-    <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+    <div className="fade-up flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
       <CartList />
 
       <form
@@ -119,7 +122,7 @@ const PaymentSection = () => {
           placeholder="12 rue des Lilas&#10;750011 Paris&#10;France"
           className="field border-border mt-0! resize-none border"
         ></textarea>
-        {error && <p className="text-destructive">{error}</p>}
+        {error && <p className="text-destructive fade-up">{error}</p>}
         <PayButton />
       </form>
     </div>

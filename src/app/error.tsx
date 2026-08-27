@@ -10,7 +10,7 @@ export default function Error({
 }) {
   return (
     <main className="bg-background flex min-h-screen items-center justify-center px-4">
-      <div className="max-w-lg text-center">
+      <div className="flex max-w-lg flex-col gap-4 text-center">
         <h1 className="font-display text-foreground text-3xl font-semibold tracking-tight">
           Cette page n&apos;a pas pu se charger
         </h1>

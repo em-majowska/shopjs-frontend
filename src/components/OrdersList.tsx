@@ -3,9 +3,15 @@ import { PiPackageLight } from "react-icons/pi";
 import OrderCard from "./OrderCard";
 import fetchProduct from "@/queries/fetchProduct";
 import { TProduct } from "@/types";
+import { cookies } from "next/headers";
 
 const OrdersList = async () => {
-  const orders = await fetchOrders();
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  if (!token) {
+    throw new Error("Veuillez vous connecter.");
+  }
+  const orders = await fetchOrders(token);
 
   const uniqueProductIds = Array.from(
     new Set(orders.flatMap((order) => order.products.map((p) => p.product))),

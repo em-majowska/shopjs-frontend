@@ -1,13 +1,12 @@
 "use server";
 import api from "@/features/api/api";
+import isAdmin from "@/middlewares/isAdmin";
 import { isAxiosError } from "axios";
 import { updateTag } from "next/cache";
-import { cookies } from "next/headers";
 
 const handleDelivery = async (id: string): Promise<string | null> => {
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
+    const token = isAdmin();
 
     if (!token) {
       throw new Error("Action non authorizée.");

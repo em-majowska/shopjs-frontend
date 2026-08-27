@@ -1,5 +1,6 @@
 "use server";
 import api from "@/features/api/api";
+import isAuthenticated from "@/middlewares/isAuthenticated";
 import { TPaymentFormState } from "@/types";
 import { isAxiosError } from "axios";
 import { cookies } from "next/headers";
@@ -15,9 +16,7 @@ const handlePayment = async (
   formData: FormData,
 ): Promise<TPaymentFormState> => {
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("token")?.value;
-
+    const token = isAuthenticated();
     if (!token) {
       throw new Error("Veuillez vous connecter avant de commander.");
     }

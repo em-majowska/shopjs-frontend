@@ -12,11 +12,11 @@ const handleSignup = async (formData: FormData) => {
     const confirmPassword = formData.get("confirmPassword")?.toString().trim();
 
     if (!username || !email || !password || !confirmPassword) {
-      throw new Error("Veuillez remplir tous les champs obligatoires");
+      return "Veuillez remplir tous les champs obligatoires";
     }
 
     if (password !== confirmPassword) {
-      throw new Error("Les mots de passe ne correspondent pas.");
+      return "Les mots de passe ne correspondent pas.";
     }
 
     const { data } = await api.post("/user/signup", {
@@ -34,7 +34,7 @@ const handleSignup = async (formData: FormData) => {
     return null;
   } catch (e) {
     if (isAxiosError(e)) {
-      return "Identifiants invalides.";
+      return "Une erreur inattendue est survenue.";
     }
     if (e instanceof Error) {
       return e.message;

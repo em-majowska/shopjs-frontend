@@ -9,7 +9,7 @@ type TProductCard = {
 
 const ProductCard = ({ product }: TProductCard) => {
   return (
-    <article className="group border-border shadow-lift hover:shadow-soft flex h-full flex-col rounded-2xl border transition-all">
+    <article className="group border-border shadow-lift hover:shadow-soft fade-up flex h-full flex-col rounded-2xl border transition-all">
       <div className="overflow-hidden">
         <Image
           src={product.thumbnail}

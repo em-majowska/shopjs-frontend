@@ -14,7 +14,7 @@ const CartSection = () => {
   const isEmpty = cart.length === 0;
 
   return isEmpty ? (
-    <section className="flex items-center justify-center">
+    <section className="fade-up flex items-center justify-center">
       <div className="bg-card border-border mx-auto flex flex-col items-center justify-center gap-6 rounded-2xl border p-15">
         <LuShoppingBag className="text-rose-foreground size-10" />
         <p className="font-display text-2xl font-medium">
@@ -30,7 +30,7 @@ const CartSection = () => {
       </div>
     </section>
   ) : (
-    <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+    <div className="fade-up flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
       <section className="bg-card border-border shadow-lift flex flex-3 flex-col gap-4 rounded-xl border p-6">
         {cart.map((item, i) => (
           <article key={item._id}>

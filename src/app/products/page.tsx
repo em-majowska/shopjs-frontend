@@ -1,10 +1,17 @@
 import ProductsList from "@/components/ProductsList";
 import SearchInput from "@/components/SearchInput";
 import { ProductsSkeleton } from "@/components/Skeletons";
+import searchData from "@/queries/searchData";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
-// TODO pregenerate on build
+export const generateStaticParams = async () => {
+  const { products } = await searchData();
+
+  return products.map((product) => ({
+    id: product._id,
+  }));
+};
 
 export const metadata: Metadata = {
   title: "Nos produits — Maison Lumière",

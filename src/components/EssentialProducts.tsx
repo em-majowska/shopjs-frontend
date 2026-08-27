@@ -32,7 +32,7 @@ const EssentialProducts = ({ products }: TEssentialProducts) => {
     return () => carousel.removeEventListener("wheel", handleWheel);
   }, []);
 
-  return (
+  return products.length > 0 ? (
     <section className="content flex flex-col gap-10">
       <div className="flex items-end justify-between">
         <div>
@@ -81,7 +81,7 @@ const EssentialProducts = ({ products }: TEssentialProducts) => {
         Voir tous les produits
       </Link>
     </section>
-  );
+  ) : null;
 };
 
 export default EssentialProducts;

@@ -19,9 +19,21 @@ export function proxy(request: NextRequest) {
 
     const isAdmin = request.cookies.get("isAdmin")?.value;
     if (!isAdmin) {
-      return NextResponse.rewrite(new URL("/users/login", request.url));
+      const requestHeaders = new Headers(request.headers);
+      requestHeaders.set(
+        "x-error-message",
+        "Vous n'avez pas les autorisations nécessaires pour accéder à cette page.",
+      );
+
+      return NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      });
     }
   }
+
+  return NextResponse.next();
 }
 export const config = {
   matcher: ["/payment", "/admin"],

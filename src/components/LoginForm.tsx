@@ -2,6 +2,7 @@
 
 import handleLogin from "@/actions/handleLogin";
 import { useStore } from "@/store/store";
+import { TLoginFormState } from "@/types";
 import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
@@ -11,18 +12,22 @@ const LoginForm = () => {
   const setAuth = useStore((store) => store.setAuth);
   const router = useRouter();
 
-  const [error, formAction, isPending] = useActionState(
-    async (_prevError: null | string, formData: FormData) => {
-      const { error, isAdmin } = await handleLogin(formData);
+  const login = async (prevState: TLoginFormState, formData: FormData) => {
+    const { error, isAdmin } = await handleLogin(prevState, formData);
 
-      if (error) return error;
-      setAuth(isAdmin);
+    if (error) return { error, isAdmin: false };
+    setAuth(isAdmin);
 
-      router.push("/products");
-      return null;
-    },
-    null,
-  );
+    router.push("/products");
+    return { error: null, isAdmin: true };
+  };
+
+  const [formState, formAction, isPending] = useActionState(login, {
+    error: null,
+    isAdmin: false,
+  });
+
+  const { error } = formState;
 
   return (
     <form
@@ -64,7 +69,7 @@ const LoginForm = () => {
           )}
         </div>
       </label>
-      {error && <p className="text-destructive">{error}</p>}
+      {error && <p className="text-destructive fade-up">{error}</p>}
       <button className="btn-primary" disabled={isPending}>
         Se connecter
       </button>

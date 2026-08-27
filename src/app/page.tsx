@@ -37,7 +37,7 @@ export default async function Home() {
   return (
     <main className="main w-full">
       <section className="content mb-20 flex flex-col justify-between gap-10 md:flex-row">
-        <div className="flex flex-col gap-7">
+        <div className="fade-up flex flex-col gap-7">
           <div>
             <p className="text-rose-foreground label mb-2">
               Cosmétiques français · Depuis 2018
@@ -64,7 +64,7 @@ export default async function Home() {
           width="530"
           alt="Sérum et crème Maison Lumière entourés de pétales de rose"
           priority
-          className="border-border shadow-soft rounded-xl border"
+          className="border-border shadow-soft fade-up rounded-xl border"
         />
       </section>
       <section className="border-border bg-sand/80 mb-20 border-t border-b px-4 py-15">
@@ -72,7 +72,7 @@ export default async function Home() {
           {values.map((val) => (
             <div
               key={val.title}
-              className="flex flex-col items-center gap-4 md:items-start"
+              className="fade-up flex flex-col items-center gap-4 md:items-start"
             >
               <val.icon className="text-rose size-6" />
               <h2 className="font-display text-2xl font-medium">{val.title}</h2>

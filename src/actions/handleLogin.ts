@@ -1,17 +1,22 @@
 "use server";
 
 import api from "@/features/api/api";
+import { TLoginFormState } from "@/types";
 import { isAxiosError } from "axios";
 import { cookies } from "next/headers";
 
 const handleLogin = async (
+  prevState: TLoginFormState,
   formData: FormData,
-): Promise<{ error: null | string; isAdmin: boolean }> => {
+): Promise<TLoginFormState> => {
   try {
     const email = formData.get("email")?.toString().trim();
     const password = formData.get("password")?.toString().trim();
     if (!email || !password || email === "" || password === "") {
-      throw new Error("Veuillez remplir tous les champs obligatoires");
+      return {
+        error: "Veuillez remplir tous les champs obligatoires",
+        isAdmin: false,
+      };
     }
     const { data } = await api.post("/user/login", { email, password });
     const token = data.token;
@@ -26,7 +31,7 @@ const handleLogin = async (
     return { error: null, isAdmin: data.admin };
   } catch (e) {
     if (isAxiosError(e)) {
-      return { error: "Identifiants invalides.", isAdmin: false };
+      return { error: "Une erreur inattendue est survenue.", isAdmin: false };
     }
     if (e instanceof Error) {
       return { error: e.message, isAdmin: false };

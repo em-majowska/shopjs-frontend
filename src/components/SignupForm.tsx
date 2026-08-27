@@ -103,7 +103,7 @@ const SignupForm = () => {
           )}
         </div>
       </label>
-      {error && <p className="text-destructive">{error}</p>}
+      {error && <p className="text-destructive fade-up">{error}</p>}
       <button className="btn-primary" disabled={isPending}>
         Créer mon compte
       </button>

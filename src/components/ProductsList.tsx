@@ -11,7 +11,7 @@ const ProductsList = async ({ searchParams }: TProductsList) => {
   const { products, error } = await searchData(search);
 
   return error ? (
-    <p className="text-muted-foreground py-10 text-center">{error}</p>
+    <p className="text-muted-foreground py-10 text-center text-xl">{error}</p>
   ) : products.length === 0 ? (
     <p className="text-muted-foreground py-10 text-center">
       Aucun produit ne correspond à votre recherche.

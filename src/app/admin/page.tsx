@@ -1,11 +1,16 @@
 import OrdersCounter from "@/components/OrdersCounter";
 import OrdersList from "@/components/OrdersList";
 import { OrderCardSkeleton } from "@/components/Skeletons";
+import { headers } from "next/headers";
 import { Suspense } from "react";
 
-const AdminPage = async () => {
+const AdminPage = () => {
   return (
     <main className="main content">
+      <Suspense>
+        <HeaderGuard />
+      </Suspense>
+
       <div className="mb-10 flex items-end justify-between">
         <div>
           <p className="label text-rose-foreground">Administration</p>
@@ -28,5 +33,16 @@ const AdminPage = async () => {
     </main>
   );
 };
+
+async function HeaderGuard() {
+  const headerList = await headers();
+  const errorMessage = headerList.get("x-error-message");
+
+  if (errorMessage) {
+    throw new Error(errorMessage);
+  }
+
+  return null;
+}
 
 export default AdminPage;
