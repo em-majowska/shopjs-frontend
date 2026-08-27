@@ -1,3 +1,5 @@
+"use server";
+
 import api from "@/features/api/api";
 import { TProduct } from "@/types";
 import { isAxiosError } from "axios";
