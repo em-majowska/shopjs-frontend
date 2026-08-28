@@ -1,9 +1,9 @@
 import fetchOrders from "@/queries/fetchOrders";
 import { PiPackageLight } from "react-icons/pi";
-import OrderCard from "./OrderCard";
 import fetchProduct from "@/queries/fetchProduct";
-import { TProduct } from "@/types";
+import { TOrder, TOrderItem, TProduct } from "@/types";
 import { cookies } from "next/headers";
+import DragAndDrop from "./DragAndDrop";
 
 const OrdersList = async () => {
   const cookieStore = await cookies();
@@ -14,8 +14,17 @@ const OrdersList = async () => {
   const orders = await fetchOrders(token);
 
   const uniqueProductIds = Array.from(
-    new Set(orders.flatMap((order) => order.products.map((p) => p.product))),
+    new Set(
+      orders.flatMap((order) =>
+        order.products.map((p) => {
+          if ("product" in p) return p.product;
+          return p._id;
+        }),
+      ),
+    ),
   );
+
+  // fetch products to show name
   const productResults = await Promise.all(
     uniqueProductIds.map((id) => fetchProduct(id)),
   );
@@ -23,6 +32,20 @@ const OrdersList = async () => {
   const productMap = new Map<string, TProduct>(
     productResults.map((product) => [product._id, product]),
   );
+
+  const namedOrders: TOrder[] = orders.map((order) => ({
+    ...order,
+    products: (order.products as TOrderItem[])
+      .map((item) => {
+        const matchedProduct = productMap.get(item.product);
+        if (!matchedProduct) return null;
+        return {
+          ...matchedProduct,
+          quantity: item.quantity,
+        };
+      })
+      .filter((item) => item !== null),
+  }));
 
   return orders.length === 0 ? (
     <section className="flex items-center justify-center">
@@ -37,11 +60,15 @@ const OrdersList = async () => {
       </div>
     </section>
   ) : (
-    <section className="flex flex-col gap-6">
-      {orders.map((order) => (
-        <OrderCard key={order._id} order={order} productMap={productMap} />
-      ))}
-    </section>
+    <>
+      <DragAndDrop orders={namedOrders} />
+
+      {/* <section className="flex flex-col gap-6">
+        {orders.map((order) => (
+          <OrderCard key={order._id} order={order} productMap={productMap} />
+        ))}
+      </section> */}
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 "use client";
-import { TOrder, TProduct } from "@/types";
+import { TCartItem, TOrder } from "@/types";
 import DeliveryPill from "./DeliveryPill";
 import CartItemElement from "./CartItem";
 import { getLocalPrice } from "@/utils/calculateLocalPrice";
@@ -9,10 +9,9 @@ import { useState, useTransition } from "react";
 
 type TOrderCard = {
   order: TOrder;
-  productMap: Map<string, TProduct>;
 };
 
-const OrderCard = ({ order, productMap }: TOrderCard) => {
+const OrderCard = ({ order }: TOrderCard) => {
   const { _id, owner, products, price, delivered, address } = order;
   const [error, setError] = useState<null | string>(null);
   const [isPending, startTransition] = useTransition();
@@ -27,6 +26,7 @@ const OrderCard = ({ order, productMap }: TOrderCard) => {
       }
     });
   };
+
   return (
     <section className="bg-card border-border shadow-shadow fade-up mx-auto flex w-full max-w-xl flex-3 flex-col gap-3 rounded-2xl border p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -42,17 +42,10 @@ const OrderCard = ({ order, productMap }: TOrderCard) => {
       <hr />
       <div className="flex flex-col gap-1">
         {products.map((item) => {
-          const productDetails = productMap.get(item.product);
-
-          if (!productDetails) return null;
-          const mergedProduct = {
-            ...productDetails,
-            quantity: item.quantity,
-          };
           return (
             <CartItemElement
               key={item._id}
-              product={mergedProduct}
+              product={item as TCartItem}
               payment={true}
             />
           );

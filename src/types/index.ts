@@ -23,9 +23,9 @@ export type TPaymentFormState = {
 };
 
 export type TOrderItem = {
-  product: string;
-  quantity: 1;
   _id: string;
+  product: string;
+  quantity: number;
 };
 
 export type TOrder = {
@@ -34,7 +34,7 @@ export type TOrder = {
     username: string;
     email: string;
   };
-  products: TOrderItem[];
+  products: TOrderItem[] | TCartItem[];
   price: number;
   delivered: boolean;
   address: string;

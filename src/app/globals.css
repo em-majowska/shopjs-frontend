@@ -7,7 +7,6 @@
   --foreground: hsl(35, 12%, 31%);
   --card: hsl(48, 20%, 99%);
 
-  /* Boutons principaux : encre brune profonde */
   --primary: hsl(21, 21%, 22%);
   --primary-foreground: hsl(45, 20%, 97%);
 
@@ -16,7 +15,6 @@
 
   --muted: hsl(45, 12%, 95%);
   --muted-foreground: hsl(35, 8%, 53%);
-  /* Survol doux : rose poudré */
   --accent: hsl(15, 30%, 92%);
   --accent-foreground: hsl(15, 20%, 38%);
 
@@ -25,17 +23,9 @@
   --border: hsl(42, 12%, 90%);
   --ring: hsl(28, 25%, 70%);
 
-  /* Teintes signature */
   --rose: hsl(12, 45%, 81%);
   --rose-foreground: hsl(12, 35%, 40%);
   --sand: hsl(45, 25%, 93%);
-  --gold: hsl(45, 45%, 68%);
-
-  --chart-1: hsl(20, 60%, 61%);
-  --chart-2: hsl(184, 30%, 57%);
-  --chart-3: hsl(220, 25%, 39%);
-  --chart-4: hsl(50, 65%, 80%);
-  --chart-5: hsl(38, 65%, 74%);
 }
 
 @theme inline {
@@ -59,8 +49,6 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -70,7 +58,6 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -78,12 +65,6 @@
   --color-rose: var(--rose);
   --color-rose-foreground: var(--rose-foreground);
   --color-sand: var(--sand);
-  --color-gold: var(--gold);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
 }
 
 @layer base {
@@ -248,39 +229,31 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: hsl(35, 12%, 23%);
-    --foreground: hsl(45, 18%, 94%);
-    --card: hsl(35, 12%, 27%);
-    --card-foreground: hsl(45, 18%, 94%);
-    --popover: hsl(35, 12%, 27%);
-    --popover-foreground: hsl(45, 18%, 94%);
-    --primary: hsl(45, 20%, 93%);
-    --primary-foreground: hsl(35, 14%, 27%);
-    --secondary: hsl(35, 10%, 32%);
-    --secondary-foreground: hsl(45, 18%, 94%);
-    --muted: hsl(35, 10%, 32%);
-    --muted-foreground: hsl(38, 8%, 71%);
-    --accent: hsl(20, 18%, 37%);
-    --accent-foreground: hsl(45, 18%, 94%);
-    --destructive: hsl(12, 65%, 65%);
-    --destructive-foreground: hsl(45, 18%, 94%);
-    --border: hsla(0, 0%, 100%, 0.12);
-    --input: hsla(0, 0%, 100%, 0.16);
-    --ring: hsl(35, 15%, 59%);
-    --rose: hsl(12, 40%, 68%);
-    --rose-foreground: hsl(12, 20%, 89%);
-    --sand: hsl(35, 12%, 33%);
-    --gold: hsl(45, 42%, 73%);
-    --chart-1: hsl(264, 75%, 64%);
-    --chart-2: hsl(162, 45%, 63%);
-    --chart-3: hsl(38, 65%, 74%);
-    --chart-4: hsl(304, 65%, 61%);
-    --chart-5: hsl(16, 75%, 63%);
+    /* Main Background & Text: Deep Indigo-Slate */
+    --background: hsl(224, 25%, 12%);
+    --foreground: hsl(220, 20%, 95%);
+
+    --card: hsl(224, 22%, 16%);
+    --card-foreground: hsl(220, 20%, 95%);
+
+    --primary: hsl(220, 90%, 94%);
+    --primary-foreground: hsl(224, 30%, 15%);
+
+    --secondary: hsl(223, 18%, 22%);
+    --secondary-foreground: hsl(220, 20%, 95%);
+    --muted: hsl(223, 18%, 22%);
+    --muted-foreground: hsl(220, 14%, 68%);
+
+    --accent: hsl(252, 28%, 28%);
+    --accent-foreground: hsl(220, 20%, 95%);
+    --destructive: hsl(350, 75%, 62%);
+
+    --border: hsla(220, 20%, 100%, 0.12);
+    --input: hsla(220, 20%, 100%, 0.16);
+    --ring: hsl(245, 60%, 68%);
+
+    --rose: hsl(265, 50%, 72%);
+    --rose-foreground: hsl(265, 30%, 90%);
+    --sand: hsl(224, 20%, 20%);
   }
 }
-
-/* body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
