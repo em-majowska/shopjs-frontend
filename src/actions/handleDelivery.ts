@@ -6,7 +6,7 @@ import { updateTag } from "next/cache";
 
 const handleDelivery = async (id: string): Promise<string | null> => {
   try {
-    const token = isAdmin();
+    const token = await isAdmin();
 
     if (!token) {
       throw new Error("Action non authorizée.");

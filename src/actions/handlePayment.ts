@@ -3,7 +3,6 @@ import api from "@/features/api/api";
 import isAuthenticated from "@/middlewares/isAuthenticated";
 import { TPaymentFormState } from "@/types";
 import { isAxiosError } from "axios";
-import { cookies } from "next/headers";
 
 type TOrderData = {
   products: { product: string; quantity: number }[];
@@ -16,7 +15,7 @@ const handlePayment = async (
   formData: FormData,
 ): Promise<TPaymentFormState> => {
   try {
-    const token = isAuthenticated();
+    const token = await isAuthenticated();
     if (!token) {
       throw new Error("Veuillez vous connecter avant de commander.");
     }
