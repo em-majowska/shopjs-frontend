@@ -43,23 +43,23 @@ const ProductPageSkeleton = () => {
 
 const OrderCardSkeleton = () => {
   return (
-    <div className="bg-card border-border mx-auto flex w-full max-w-xl animate-pulse flex-col gap-4 rounded-2xl border p-6">
-      <div className="flex items-center justify-between">
-        <div className="bg-muted h-6 w-36 rounded-md" />
-        <div className="bg-muted h-6 w-24 rounded-full" />
-      </div>
+    <>
+      <div className="bg-muted mb-4 h-4 w-32 animate-pulse rounded-md"></div>
+      <div className="bg-card border-border mx-auto flex w-full max-w-xl animate-pulse flex-col gap-4 rounded-2xl border p-6">
+        <div className="flex items-center justify-between">
+          <div className="bg-muted h-6 w-36 rounded-md" />
+          <div className="bg-muted h-6 w-24 rounded-full" />
+        </div>
 
-      <div className="flex flex-col gap-2">
-        <div className="bg-muted h-4 w-48 rounded-md" />
-        <div className="bg-muted h-4 w-64 rounded-md" />
-      </div>
+        <div className="flex flex-col gap-2">
+          <div className="bg-muted h-4 w-48 rounded-md" />
+          <div className="bg-muted h-4 w-64 rounded-md" />
+        </div>
 
-      <hr className="border-border" />
+        <hr className="border-border" />
 
-      <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-muted size-12 rounded-lg" />
             <div className="flex flex-col gap-1">
               <div className="bg-muted h-4 w-32 rounded-md" />
               <div className="bg-muted h-3 w-16 rounded-md" />
@@ -67,24 +67,23 @@ const OrderCardSkeleton = () => {
           </div>
           <div className="bg-muted h-4 w-12 rounded-md" />
         </div>
+
+        <hr className="border-border" />
+
+        <div className="flex items-end justify-between py-2">
+          <div className="bg-muted h-5 w-12 rounded-md" />
+          <div className="bg-muted h-6 w-20 rounded-md" />
+        </div>
+
+        <div className="bg-muted h-10 w-44 self-end rounded-xl" />
       </div>
-
-      <hr className="border-border" />
-
-      <div className="flex items-end justify-between py-2">
-        <div className="bg-muted h-5 w-12 rounded-md" />
-        <div className="bg-muted h-6 w-20 rounded-md" />
-      </div>
-
-      <div className="bg-muted h-10 w-44 self-end rounded-xl" />
-    </div>
+    </>
   );
 };
 
 const OrdersListSkeleton = () => {
   return (
-    <section className="flex flex-col gap-6">
-      <OrderCardSkeleton />
+    <section className="flex gap-6">
       <OrderCardSkeleton />
       <OrderCardSkeleton />
     </section>

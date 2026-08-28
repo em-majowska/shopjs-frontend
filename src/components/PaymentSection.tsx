@@ -74,6 +74,7 @@ const PaymentSection = () => {
     return () => {
       clearTimeout(redirectTimer);
       clearInterval(countdownInterval);
+      setCountdown(10);
       setIsSuccess(false);
     };
   }, [isSuccess, router]);

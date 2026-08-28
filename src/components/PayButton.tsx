@@ -14,7 +14,7 @@ const PayButton = () => {
     <button className="btn-primary w-full" disabled={pending}>
       <SlWallet className="size-4" />{" "}
       {pending ? (
-        "Payment en cours de validation..."
+        "Payment en cours..."
       ) : (
         <span>Payer {isHydrated && `(${total})`}</span>
       )}

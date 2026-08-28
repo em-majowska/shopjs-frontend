@@ -60,15 +60,7 @@ const OrdersList = async () => {
       </div>
     </section>
   ) : (
-    <>
-      <DragAndDrop orders={namedOrders} />
-
-      {/* <section className="flex flex-col gap-6">
-        {orders.map((order) => (
-          <OrderCard key={order._id} order={order} productMap={productMap} />
-        ))}
-      </section> */}
-    </>
+    <DragAndDrop orders={namedOrders} />
   );
 };
 

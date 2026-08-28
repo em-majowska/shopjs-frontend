@@ -1,5 +1,5 @@
 import BackButton from "@/components/BackButton";
-import ProductDetails from "@/components/ProductDetails";
+import ProductSection from "@/components/ProductSection";
 import { ProductPageSkeleton } from "@/components/Skeletons";
 import fetchProduct from "@/queries/fetchProduct";
 import { Metadata } from "next";
@@ -37,7 +37,7 @@ const ProductIdPage = async ({ params }: TProductIdPage) => {
     <main className="main content">
       <BackButton />
       <Suspense fallback={<ProductPageSkeleton />}>
-        <ProductDetails params={params} />
+        <ProductSection params={params} />
       </Suspense>
     </main>
   );

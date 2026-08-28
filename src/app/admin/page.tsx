@@ -1,6 +1,6 @@
 import OrdersCounter from "@/components/OrdersCounter";
 import OrdersList from "@/components/OrdersList";
-import { OrderCardSkeleton } from "@/components/Skeletons";
+import OrdersListSkeleton, { OrderCardSkeleton } from "@/components/Skeletons";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 
@@ -27,7 +27,7 @@ const AdminPage = () => {
           <OrdersCounter />
         </Suspense>
       </div>
-      <Suspense fallback={<OrderCardSkeleton />}>
+      <Suspense fallback={<OrdersListSkeleton />}>
         <OrdersList />
       </Suspense>
     </main>
