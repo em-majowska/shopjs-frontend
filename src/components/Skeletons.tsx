@@ -43,7 +43,7 @@ const ProductPageSkeleton = () => {
 
 const OrderCardSkeleton = () => {
   return (
-    <>
+    <div className="flex flex-1 flex-col gap-4">
       <div className="bg-muted mb-4 h-4 w-32 animate-pulse rounded-md"></div>
       <div className="bg-card border-border mx-auto flex w-full max-w-xl animate-pulse flex-col gap-4 rounded-2xl border p-6">
         <div className="flex items-center justify-between">
@@ -77,7 +77,7 @@ const OrderCardSkeleton = () => {
 
         <div className="bg-muted h-10 w-44 self-end rounded-xl" />
       </div>
-    </>
+    </div>
   );
 };
 

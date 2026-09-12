@@ -61,7 +61,7 @@ const EssentialProducts = ({ products }: TEssentialProducts) => {
             <ProductCard product={product} />
           </Link>
         ))}
-        <div className="flex flex-col items-center justify-center gap-3 px-10">
+        <div className="hidden flex-col items-center justify-center gap-3 px-10 md:flex">
           <div className="btn-outline h-12 w-12 rounded-full">
             <button
               onClick={() =>

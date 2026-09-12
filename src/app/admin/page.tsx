@@ -1,6 +1,6 @@
 import OrdersCounter from "@/components/OrdersCounter";
 import OrdersList from "@/components/OrdersList";
-import OrdersListSkeleton, { OrderCardSkeleton } from "@/components/Skeletons";
+import OrdersListSkeleton from "@/components/Skeletons";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 

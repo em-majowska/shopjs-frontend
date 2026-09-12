@@ -5,6 +5,7 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 import CartButton from "./CartButton";
 import { useState } from "react";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import ThemeButton from "./ThemeButton";
 
 const Header = () => {
   const isAuthenticated = useStore((store) => store.isAuthenticated);
@@ -26,6 +27,7 @@ const Header = () => {
         >
           Maison Lumière
         </Link>
+        <ThemeButton />
 
         <nav className="hidden w-full items-center justify-end md:flex">
           <ul className="flex items-center gap-2">

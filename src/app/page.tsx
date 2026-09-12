@@ -60,7 +60,7 @@ export default async function Home() {
         </div>
         <Image
           src={HeroImage}
-          height="330"
+          height="332"
           width="530"
           alt="Sérum et crème Maison Lumière entourés de pétales de rose"
           priority

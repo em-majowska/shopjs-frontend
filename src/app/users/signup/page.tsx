@@ -24,7 +24,7 @@ const SignupPage = () => {
       <p className="text-muted-foreground text-sm">
         Déjà un compte ?{" "}
         <Link
-          href="/users/signup"
+          href="/users/login"
           className="text-foreground font-medium underline hover:cursor-pointer"
         >
           Se connecter
