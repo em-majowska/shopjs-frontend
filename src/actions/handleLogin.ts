@@ -20,15 +20,15 @@ const handleLogin = async (
     }
     const { data } = await api.post("/user/login", { email, password });
     const token = data.token;
-
+    const isAdmin = Boolean(data?.admin);
     const cookieStore = await cookies();
     cookieStore.set("token", token, {
       expires: Date.now() + 1000 * 60 * 60 * 24 * 14,
     });
-    cookieStore.set("isAdmin", data.admin, {
+    cookieStore.set("isAdmin", String(isAdmin), {
       expires: Date.now() + 1000 * 60 * 60 * 24 * 14,
     });
-    return { error: null, isAdmin: data.admin };
+    return { error: null, isAdmin: isAdmin };
   } catch (e) {
     if (isAxiosError(e)) {
       return { error: "Une erreur inattendue est survenue.", isAdmin: false };
