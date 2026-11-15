@@ -32,7 +32,7 @@ const CartSection = () => {
   ) : (
     <div className="fade-up flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
       <section className="bg-card border-border shadow-lift flex flex-3 flex-col gap-4 rounded-xl border p-6">
-        {cart.map((item, i) => (
+        {cart.map((item) => (
           <article key={item._id}>
             <CartItemElement product={item} payment={false} />
             <hr />

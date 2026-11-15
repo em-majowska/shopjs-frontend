@@ -5,7 +5,9 @@ import { cacheLife, cacheTag } from "next/cache";
 
 const fetchOrders = async (token: string) => {
   "use cache";
-  cacheLife({ revalidate: 60 });
+  cacheLife({
+    revalidate: Number(process.env.NEXT_PUBLIC_ADMIN_CACHE_LIFE) || 60,
+  });
   cacheTag("admin-orders");
 
   try {

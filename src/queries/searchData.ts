@@ -9,7 +9,9 @@ const searchData = async (
   query?: string,
 ): Promise<{ products: TProduct[]; error: null | string }> => {
   "use cache";
-  cacheLife({ revalidate: 180 });
+  cacheLife({
+    revalidate: Number(process.env.NEXT_PUBLIC_PUBLIC_CACHE_LIFE) || 180,
+  });
 
   try {
     const { data } = await api.get<TProduct[]>("/products", {

@@ -4,7 +4,6 @@ import { Outfit, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { cookies } from "next/headers";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -25,17 +24,13 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const theme = (await cookies()).get("theme")?.value || "light";
-
   return (
     <html
       lang="fr"
       className={`${outfit.variable} ${cormorant.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
     >
-      <body
-        className={`${theme === "dark" ? "dark" : ""} flex min-h-full flex-col`}
-      >
+      <body className="flex min-h-full flex-col">
         <Header />
         {children}
         <Footer />
